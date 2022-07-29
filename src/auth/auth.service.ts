@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { LoginInput, SignupInput } from './dto/create-auth.input';
+import { AccountLoginInput, SignupInput } from './dto/create-auth.input';
 import { User, UserDocument } from './entities/auth.entity';
 import * as bcrypt from 'bcrypt';
 
@@ -33,7 +33,7 @@ export class AuthService {
     return userToJson(user);
   }
 
-  async login(loginInput: LoginInput) {
+  async login(loginInput: AccountLoginInput) {
     const user = await this.userModel.findOne({ email: loginInput.username });
     if (!(user && confirmPassword(loginInput.password, user.password))) {
       throw new Error('username or password is incorect');

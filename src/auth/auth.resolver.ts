@@ -1,7 +1,7 @@
 import { Resolver, Mutation, Args } from '@nestjs/graphql';
 import { AuthService } from './auth.service';
 import { User } from './entities/auth.entity';
-import { LoginInput, SignupInput } from './dto/create-auth.input';
+import { AccountLoginInput, SignupInput } from './dto/create-auth.input';
 import { AuthDTO } from './dto/auth.dto';
 import { JwtService } from '@nestjs/jwt';
 import JWTConfig from 'src/config/jwt.conf';
@@ -22,7 +22,7 @@ export class AuthResolver {
   }
 
   @Mutation(() => AuthDTO)
-  async login(@Args('data') loginInput: LoginInput) {
+  async login(@Args('input') loginInput: AccountLoginInput) {
     const user = await this.authService.login(loginInput);
     user.token = this.jwtService.sign(user, { secret: JWTConfig.secret });
     return user;

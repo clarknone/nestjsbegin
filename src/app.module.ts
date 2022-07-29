@@ -8,6 +8,8 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { JWTStrategy } from './auth/strategy/auth.strategy';
 import { PostsModule } from './posts/posts.module';
+import { CustomerModule } from './customer/customer.module';
+import { VerifyModule } from './verify/verify.module';
 
 @Module({
   imports: [
@@ -20,6 +22,8 @@ import { PostsModule } from './posts/posts.module';
       playground: true,
       driver: ApolloDriver,
     }),
+    CustomerModule,
+    VerifyModule,
   ],
   controllers: [AppController],
   providers: [AppService, JWTStrategy],
